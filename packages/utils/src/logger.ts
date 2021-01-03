@@ -6,6 +6,7 @@ const global = getGlobalObject<Window | NodeJS.Global>();
 
 /** Prefix for logging strings */
 const PREFIX = 'Sentry Logger ';
+console.log(`prefix: `, PREFIX);
 
 /** JSDoc */
 class Logger {
@@ -33,7 +34,8 @@ class Logger {
       return;
     }
     consoleSandbox(() => {
-      global.console.log(`${PREFIX}[Log]: ${args.join(' ')}`);
+      let _console = global.console || window.console;
+      _console.log(`${PREFIX}[Log]: ${args.join(' ')}`);
     });
   }
 
@@ -43,7 +45,8 @@ class Logger {
       return;
     }
     consoleSandbox(() => {
-      global.console.warn(`${PREFIX}[Warn]: ${args.join(' ')}`);
+      let _console = global.console || window.console;
+      _console.warn(`${PREFIX}[Warn]: ${args.join(' ')}`);
     });
   }
 
@@ -53,7 +56,8 @@ class Logger {
       return;
     }
     consoleSandbox(() => {
-      global.console.error(`${PREFIX}[Error]: ${args.join(' ')}`);
+      let _console = global.console || window.console;
+      _console.error(`${PREFIX}[Error]: ${args.join(' ')}`);
     });
   }
 }
